@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+ 
+int line[30][30];
+int main (){
+    int i,j,n,m,num;
+    memset(line,0,sizeof(line));
+    while(~scanf("%d",&n)){
+        memset(line,0,sizeof(line));
+        for(i=0;i<30;i++)
+            line[0][i]=line[i][0]=1;
+        num=1;
+        line[1][n+1]=1;
+        for(i=1,j=0;num<=(n*n-n)/2+n;){
+            while(line[i][j+1]==0){
+                line[i][++j]=num++;
+            }
+            while(line[i+1][j-1]==0){
+                line[++i][--j]=num++;
+            }
+            while(line[i-1][j]==0){
+                line[--i][j]=num++;
+            }
+        }
+        for(i=1;i<=n;i++){
+            for(j=1;j<=n+1-i;j++)
+                printf("%4d",line[i][j]);
+            printf("\n");
+        }
+    }
+    return 0;
+}
